@@ -1,0 +1,20 @@
+{
+  "name": "app",
+  "version": "1.1.0",
+  "authors": [
+    "codinghouse"
+  ],
+  "description": "",
+  "main": "gulpfile.js",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-ui-router": "~0.2.15"
+  }
+}
