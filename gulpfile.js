@@ -14,6 +14,7 @@ var paths = {
   assets: [
     src_path + '/**/*.*',
     '!' + src_path + '/templates/**/*.*',
+    '!' + src_path + '/index.jade',
     '!' + src_path + '/{scss,js}/**/*.*'
   ],
   sass: [
@@ -66,10 +67,25 @@ gulp.task('copy', function() {
     .pipe(gulp.dest(build_path));
 });
 
-// Copies templates
-gulp.task('copy:templates', function() {
-  return gulp.src(src_path + '/templates/**/*.html')
+// Compiles jade and copies templates
+gulp.task('jade', function() {
+  sequence(['jade:index', 'jade:views']);
+});
+gulp.task('jade:views', function() {
+  var YOUR_LOCALS = {};
+  return gulp.src([src_path + '/templates/**/*.jade'])
+    .pipe($.jade({
+      locals: YOUR_LOCALS
+    }))
     .pipe(gulp.dest(build_path + '/templates'));
+});
+gulp.task('jade:index', function() {
+  var YOUR_LOCALS = {};
+  return gulp.src([src_path + '/index.jade'])
+    .pipe($.jade({
+      locals: YOUR_LOCALS
+    }))
+    .pipe(gulp.dest(build_path + '/'));
 });
 
 // Starts a test server, which you can view at http://localhost:1337
@@ -86,7 +102,7 @@ gulp.task('server', ['build'], function() {
 
 // Builds your entire app once, the callback is to start the server
 gulp.task('build', function(cb) {
-  sequence('clean', ['copy', 'sass', 'javascripts'], 'copy:templates', cb);
+  sequence('clean', ['copy', 'sass', 'javascripts'], 'jade', cb);
 });
 
 // Default task: builds your app, and recompiles assets when they change

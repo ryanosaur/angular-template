@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.config.routes', [])
-    .config(function($urlRouterProvider, $locationProvider, $stateProvider) {
+    .config(['$urlRouterProvider', '$locationProvider', '$stateProvider', function($urlRouterProvider, $locationProvider, $stateProvider) {
       $urlRouterProvider.otherwise('/');
 
       $stateProvider
@@ -17,5 +17,5 @@
       });
 
       $locationProvider.hashPrefix('!');
-    });
+    }]);
 })();
