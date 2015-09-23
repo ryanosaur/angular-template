@@ -72,11 +72,11 @@ gulp.task('copy:templates', function() {
     .pipe(gulp.dest(build_path + '/templates'));
 });
 
-// Starts a test server, which you can view at http://localhost:8080
+// Starts a test server, which you can view at http://localhost:1337
 gulp.task('server', ['build'], function() {
   gulp.src(build_path)
     .pipe($.webserver({
-      port: 8080,
+      port: 1337,
       host: 'localhost',
       fallback: 'index.html',
       livereload: true,
